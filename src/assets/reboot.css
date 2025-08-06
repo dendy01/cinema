@@ -4,17 +4,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: none;
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-color: #121829CC;
-    background-image: url(../../public/images/Background.png);
+    background-image: url(../../public/images/background.png);
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-
-    font-family: "Poppins", sans-serif;
 }
 
 img,

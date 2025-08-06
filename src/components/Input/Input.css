@@ -1,0 +1,36 @@
+.label {
+    padding: 11px 0;
+    border-radius: 12px;
+    border: 1px solid #323B54;
+
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #ffffff;
+    background-color: transparent;
+}
+
+.input::placeholder {
+    font-size: 14px;
+
+    color: #475069;
+}
+
+.serch {
+    width: 24px;
+    height: 24px;
+
+    display: none;
+}
+
+.serchIcon {
+    margin-left: 16px;
+
+    display: block;
+}
