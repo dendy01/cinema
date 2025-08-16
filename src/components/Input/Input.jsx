@@ -4,7 +4,7 @@ function Input({ placeholder, inputType, isIcon })
 {
 	const getClassIcon = () =>
 	{
-		return isIcon ? 'serchIcon' : '';
+		return isIcon ? 'serch-icon' : '';
 	};
 
 	return (
@@ -18,9 +18,9 @@ function Input({ placeholder, inputType, isIcon })
 				alt="serch"
 			/>
 		    <input 
-				className='input' 
-				id={ inputType } 
-				type={ inputType } 
+				className='input'
+				id={ inputType }
+				type={ inputType }
 				placeholder={ placeholder }
 			/>
 		</label>

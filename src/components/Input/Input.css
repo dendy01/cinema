@@ -1,4 +1,5 @@
 .label {
+    width: 100%;
     padding: 11px 0;
     border-radius: 12px;
     border: 1px solid #323B54;
@@ -29,7 +30,7 @@
     display: none;
 }
 
-.serchIcon {
+.serch-icon {
     margin-left: 16px;
 
     display: block;
