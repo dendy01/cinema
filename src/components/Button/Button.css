@@ -1,0 +1,50 @@
+.button {
+    padding: 16px 32px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    line-height: 24px;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #ffffff;
+    background-color: #7B6EF6;
+}
+
+.button:hover {
+    background-color: #6b5fd6;
+}
+
+.button-favorites {
+    padding: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    color: #7B6EF6;
+    background-color: transparent;
+}
+
+.button-favorites:hover {
+    color: #6b5fd6;
+    background-color: transparent;
+}
+
+.button-favorites__active {
+    color: #37D8A7;
+}
+
+.button-favorites__active:hover {
+    color: #2fa380;
+}
+
+.button-icon {
+    width: 24px;
+    height: 24px;
+}
