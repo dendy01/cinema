@@ -1,8 +1,9 @@
-import './Paragraph.css';
+import classNames from 'classnames';
+import styles from './Paragraph.module.css';
 
 function Paragraph({ text }) {
 	return (
-		<p className="paragraph">{ text }</p>
+		<p className={ classNames(styles['paragraph']) }>{ text }</p>
 	);
 }
 

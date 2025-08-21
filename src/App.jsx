@@ -1,4 +1,5 @@
-import './App.css';
+import classNames from 'classnames';
+import styles from './App.module.css';
 import Button from './components/Button/Button';
 import Input from './components/Input/Input';
 import Header from './components/Layout/Header/Header';
@@ -14,13 +15,13 @@ function App() {
 	};
 
 	return (
-		<div className='container'>
+		<div className={ classNames(styles['container']) }>
 			<Header></Header>
 
-			<div className='app-serch'>
+			<div className={ classNames(styles['app-serch']) }>
 				<Title text={'Поиск'}/>
 				<Paragraph text={'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'}/>
-				<div className='app-serch__form'>
+				<div className={ classNames(styles['app-serch__form']) }>
 					<Input
 						placeholder={ 'Введите название' }
 						inputType={ 'serch' }

@@ -1,4 +1,5 @@
-import './Input.css';
+import classNames from 'classnames';
+import styles from './Input.module.css';
 
 function Input({ placeholder, inputType, isIcon })
 {
@@ -9,16 +10,16 @@ function Input({ placeholder, inputType, isIcon })
 
 	return (
 		<label 
-			className='label' 
+			className={ classNames(styles['label']) } 
 			htmlFor={ inputType }
 		>
 			<img 
-				className={ `serch ${ getClassIcon() }` }
-				src="/icons/serch-icon.svg" 
+				className={ classNames(styles['serch'], getClassIcon()) }
+				src="/icons/serch-icon.svg"
 				alt="serch"
 			/>
 		    <input 
-				className='input'
+				className={ classNames(styles['input']) }
 				id={ inputType }
 				type={ inputType }
 				placeholder={ placeholder }
