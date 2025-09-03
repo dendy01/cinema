@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Header.module.css';
 
-function Header()
+function Header({ user, logout, switchOpenLogin })
 {
 	return (
 		<header className={ classNames(styles['header']) }>
@@ -24,17 +24,42 @@ function Header()
 				>
 					Мои фильмы
 				</a>
-				<a
-					className={ classNames(styles['link']) }
-					href="#"
-				>
-                    Войти
-					<img
-						className={ classNames(styles['login']) }
-						src="/icons/login-icon.svg"
-						alt="login"
-					/>
-				</a>
+
+				{
+					user ? <>
+						<a
+							className={ classNames(styles['link']) }
+							href="#"
+						>
+							{ user }
+							<img
+								className={ classNames(styles['login']) }
+								src="/icons/user-icon.svg"
+								alt="user"
+							/>
+						</a>
+						<a
+							className={ classNames(styles['link']) }
+							href="#"
+							onClick={ logout }
+						>
+							Выйти
+						</a>
+					</> : <>
+						<a
+							className={ classNames(styles['link']) }
+							href="#"
+							onClick={ switchOpenLogin }
+						>
+                    		Войти
+							<img
+								className={ classNames(styles['login']) }
+								src="/icons/login-icon.svg"
+								alt="login"
+							/>
+						</a>
+					</>
+				}
 			</div>
 		</header>
 	);

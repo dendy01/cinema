@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
 import styles from './App.module.css';
 import Button from './components/Button/Button';
 import Input from './components/Input/Input';
@@ -9,28 +10,116 @@ import Title from './components/Title/Title';
 import { cards } from './model/Cards';
 
 function App() {
-	const handleClick = (event) =>
+	const inputRef = useRef(null);
+	const [usersState, setUsersState] = useState([]);
+	const [currentUserState, setCurrentUserState] = useState('');
+	const [openState, setOpenState] = useState(false);
+
+	useEffect(() => {
+		const users = JSON.parse(localStorage.getItem('users'));
+
+		if (users?.length)
+		{
+			const currentUser = users.find((item) => item.isLogined);
+
+			setUsersState(users);
+			setCurrentUserState(currentUser?.userName);
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem('users', JSON.stringify(usersState));
+	}, [usersState]);
+
+	const login = () =>
 	{
-		console.log(event.target);
+		if (!inputRef.current.value)
+		{
+			inputRef.current.focus();
+		}
+		else
+		{
+			const userStore = usersState.find((user) => user.userName === inputRef.current.value);
+
+			if (userStore)
+			{
+				const updateUsers = usersState.map((user) => {
+					return { ...user, isLogined: user.userName === userStore.userName };
+				});
+
+				setUsersState([ ...updateUsers ]);
+			}
+			else
+			{
+				const updateUsers = usersState.map((user) => {
+					return { ...user, isLogined: false };
+				});
+
+				setUsersState([ ...updateUsers, {
+					userName: inputRef.current.value,
+					isLogined: true
+				} ]);
+			}
+
+			setCurrentUserState(inputRef.current.value);
+			setOpenState(!openState);
+			inputRef.current.value = '';
+		}
+	};
+
+	const logout = () =>
+	{
+		const updateUsers = usersState.map((user) => {
+			return { ...user, isLogined: false };
+		});
+
+		setUsersState([...updateUsers]);
+		setCurrentUserState('');
+	};
+
+	const switchOpenLogin = () =>
+	{
+		setOpenState(!openState);
 	};
 
 	return (
 		<div className={ classNames(styles['container']) }>
-			<Header></Header>
+			<Header
+				user={ currentUserState }
+				logout={ logout }
+				switchOpenLogin={ switchOpenLogin }
+			></Header>
+
+			{
+				openState ? <>
+					<div className={ classNames(styles['app-login']) }>
+						<Title text={ 'Вход' }/>
+						<div className={ classNames(styles['app-login__form']) }>
+							<Input
+								placeholder={ 'Ваше имя' }
+								inputType={ 'text' }
+								isIcon={ false }
+								ref={ inputRef }
+							/>
+							<Button
+								text={ 'Войти в профиль' }
+								onClick={ login }
+							/>
+						</div>
+					</div>
+				</> : <></>
+			}
 
 			<div className={ classNames(styles['app-serch']) }>
-				<Title text={'Поиск'}/>
+				<Title text={ 'Поиск' }/>
 				<Paragraph text={'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'}/>
 				<div className={ classNames(styles['app-serch__form']) }>
 					<Input
 						placeholder={ 'Введите название' }
 						inputType={ 'serch' }
-						isIcon={ 'true' }
+						isIcon={ true }
 					/>
-					<Button
-						text={'Искать'}
-						onClick={ handleClick }
-					/>
+					<Button text={ 'Искать' }/>
 				</div>
 			</div>
 			<MovieCards cards={ cards }/>

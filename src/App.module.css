@@ -5,6 +5,21 @@
     padding: 0 120px 50px 120px;
 }
 
+.app-login {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.app-login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
 .app-serch {
     width: 50%;
     margin-top: 80px;

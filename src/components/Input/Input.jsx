@@ -1,20 +1,18 @@
 import classNames from 'classnames';
+import { forwardRef } from 'react';
 import styles from './Input.module.css';
 
-function Input({ placeholder, inputType, isIcon })
+const Input = forwardRef(function Input({ placeholder, inputType, isIcon }, ref)
 {
-	const getClassIcon = () =>
-	{
-		return isIcon ? 'serch-icon' : '';
-	};
-
 	return (
 		<label 
 			className={ classNames(styles['label']) } 
 			htmlFor={ inputType }
 		>
 			<img 
-				className={ classNames(styles['serch'], getClassIcon()) }
+				className={ classNames(styles['serch'], {
+					[styles['serch-icon']]: isIcon
+				}) }
 				src="/icons/serch-icon.svg"
 				alt="serch"
 			/>
@@ -23,9 +21,10 @@ function Input({ placeholder, inputType, isIcon })
 				id={ inputType }
 				type={ inputType }
 				placeholder={ placeholder }
+				ref={ ref }
 			/>
 		</label>
 	);
-}
+});
 
 export default Input;
