@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { forwardRef } from 'react';
 import styles from './Input.module.css';
 
-const Input = forwardRef(function Input({ placeholder, inputType, isIcon }, ref)
+const Input = forwardRef(({ placeholder, inputType, isIcon }, ref) =>
 {
 	return (
 		<label 

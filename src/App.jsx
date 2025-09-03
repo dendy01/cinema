@@ -11,6 +11,7 @@ import { cards } from './model/Cards';
 
 function App() {
 	const inputRef = useRef(null);
+	const buttonRef = useRef(null);
 	const [usersState, setUsersState] = useState([]);
 	const [currentUserState, setCurrentUserState] = useState('');
 	const [openState, setOpenState] = useState(false);
@@ -82,6 +83,11 @@ function App() {
 		setOpenState(!openState);
 	};
 
+	const handleClick = () =>
+	{
+		console.log(buttonRef.current);
+	};
+
 	return (
 		<div className={ classNames(styles['container']) }>
 			<Header
@@ -119,7 +125,11 @@ function App() {
 						inputType={ 'serch' }
 						isIcon={ true }
 					/>
-					<Button text={ 'Искать' }/>
+					<Button
+						text={ 'Искать' }
+						ref={ buttonRef }
+						onClick={ handleClick }
+					/>
 				</div>
 			</div>
 			<MovieCards cards={ cards }/>
