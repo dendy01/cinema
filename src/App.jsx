@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './App.module.css';
 import Button from './components/Button/Button';
 import Input from './components/Input/Input';
@@ -8,23 +8,24 @@ import MovieCards from './components/MovieCards/MovieCards';
 import Paragraph from './components/Paragraph/Paragraph';
 import Title from './components/Title/Title';
 import { cards } from './model/Cards';
+import { UserContextProvider } from './context/user.context.jsx';
+import { UserContext } from './context/user.context.js';
 
 function App() {
 	const inputRef = useRef(null);
 	const buttonRef = useRef(null);
+
 	const [usersState, setUsersState] = useState([]);
-	const [currentUserState, setCurrentUserState] = useState('');
 	const [openState, setOpenState] = useState(false);
+
+	const { setUser } = useContext(UserContext);
 
 	useEffect(() => {
 		const users = JSON.parse(localStorage.getItem('users'));
 
 		if (users?.length)
 		{
-			const currentUser = users.find((item) => item.isLogined);
-
 			setUsersState(users);
-			setCurrentUserState(currentUser?.userName);
 		}
 	}, []);
 
@@ -62,8 +63,8 @@ function App() {
 				} ]);
 			}
 
-			setCurrentUserState(inputRef.current.value);
 			setOpenState(!openState);
+			setUser(inputRef.current.value);
 			inputRef.current.value = '';
 		}
 	};
@@ -75,7 +76,7 @@ function App() {
 		});
 
 		setUsersState([...updateUsers]);
-		setCurrentUserState('');
+		setUser('');
 	};
 
 	const switchOpenLogin = () =>
@@ -83,15 +84,9 @@ function App() {
 		setOpenState(!openState);
 	};
 
-	const handleClick = () =>
-	{
-		console.log(buttonRef.current);
-	};
-
 	return (
 		<div className={ classNames(styles['container']) }>
 			<Header
-				user={ currentUserState }
 				logout={ logout }
 				switchOpenLogin={ switchOpenLogin }
 			></Header>
@@ -128,7 +123,6 @@ function App() {
 					<Button
 						text={ 'Искать' }
 						ref={ buttonRef }
-						onClick={ handleClick }
 					/>
 				</div>
 			</div>

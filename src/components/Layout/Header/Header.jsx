@@ -1,8 +1,12 @@
 import classNames from 'classnames';
 import styles from './Header.module.css';
+import { useContext } from 'react';
+import { UserContext } from '../../../context/user.context.js';
 
-function Header({ user, logout, switchOpenLogin })
+function Header({ logout, switchOpenLogin })
 {
+	const { user } = useContext(UserContext);
+
 	return (
 		<header className={ classNames(styles['header']) }>
 			<img
