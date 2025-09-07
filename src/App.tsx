@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './App.module.css';
-import Button from './components/Button/Button.js';
-import Input from './components/Input/Input.js';
-import Header from './components/Layout/Header/Header.js';
-import MovieCards from './components/MovieCards/MovieCards.js';
-import Paragraph from './components/Paragraph/Paragraph.js';
-import Title from './components/Title/Title.jsx';
+import Button from './components/Button/Button.tsx';
+import Input from './components/Input/Input.tsx';
+import Header from './components/Layout/Header/Header.tsx';
+import MovieCards from './components/MovieCards/MovieCards.tsx';
+import Paragraph from './components/Paragraph/Paragraph.tsx';
+import Title from './components/Title/Title.tsx';
 import { UserContext } from './context/user.context.ts';
 import { cards } from './model/Cards.ts';
 
