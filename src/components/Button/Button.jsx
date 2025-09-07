@@ -1,16 +1,22 @@
-import './Button.css';
+import classNames from 'classnames';
+import { forwardRef } from 'react';
+import styles from './Button.module.css';
 
-function Button({ text, icon, onClick, buttonClass }) {
-
+const Button = forwardRef(({ text, icon, onClick, buttonClass, buttonActive }, ref) =>
+{
 	return (
 		<button 
-			className={ `button ${ buttonClass ? buttonClass : '' }` }
+			className={ classNames(styles['button'], {
+				[styles[buttonClass]]: buttonClass,
+				[styles[buttonActive]]: buttonActive
+			}) }
+			ref={ ref }
 			onClick={ onClick }
 		>
-			{ icon ? <><img className='button-icon' src={ icon } alt="" /></> : '' }
+			{ icon ? <><img className={ classNames(styles['button-icon']) } src={ icon } alt="" /></> : '' }
 			{ text }
 		</button>
 	);
-}
+});
 
 export default Button;
