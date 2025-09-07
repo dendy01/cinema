@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './Title.module.css';
-import type { TitleProps } from './Title.props';
+import type { TitleProps } from './Title.props.ts';
 
 function Title({ children }: TitleProps) {
 	return (

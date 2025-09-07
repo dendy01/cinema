@@ -8,8 +8,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, icon, onC
 	return (
 		<button
 			className={ classNames(styles['button'], {
-				[styles[buttonClass]]: buttonClass,
-				[styles[buttonActive]]: buttonActive
+				[styles[buttonClass || '']]: buttonClass,
+				[styles[buttonActive || '']]: buttonActive
 			}) }
 			ref={ ref }
 			onClick={ onClick }

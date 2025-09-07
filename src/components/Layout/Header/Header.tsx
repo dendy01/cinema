@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
-import { UserContext } from '../../../context/user.context.js';
+import { UserContext } from '../../../context/user.context.ts';
 import styles from './Header.module.css';
-import type { HeaderProps } from './Header.props.js';
+import type { HeaderProps } from './Header.props.ts';
 
 function Header({ logout, switchOpenLogin }: HeaderProps)
 {
