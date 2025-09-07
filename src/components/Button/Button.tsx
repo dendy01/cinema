@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import { forwardRef } from 'react';
 import styles from './Button.module.css';
+import { type ButtonProps } from './Button.props.ts';
 
-const Button = forwardRef(({ text, icon, onClick, buttonClass, buttonActive }, ref) =>
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, icon, onClick, buttonClass, buttonActive }, ref) =>
 {
 	return (
-		<button 
+		<button
 			className={ classNames(styles['button'], {
 				[styles[buttonClass]]: buttonClass,
 				[styles[buttonActive]]: buttonActive
@@ -14,7 +15,7 @@ const Button = forwardRef(({ text, icon, onClick, buttonClass, buttonActive }, r
 			onClick={ onClick }
 		>
 			{ icon ? <><img className={ classNames(styles['button-icon']) } src={ icon } alt="" /></> : '' }
-			{ text }
+			{ children }
 		</button>
 	);
 });

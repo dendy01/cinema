@@ -1,30 +1,38 @@
 import classNames from 'classnames';
 import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './App.module.css';
-import Button from './components/Button/Button';
-import Input from './components/Input/Input';
-import Header from './components/Layout/Header/Header';
-import MovieCards from './components/MovieCards/MovieCards';
-import Paragraph from './components/Paragraph/Paragraph';
-import Title from './components/Title/Title';
-import { cards } from './model/Cards';
-import { UserContextProvider } from './context/user.context.jsx';
-import { UserContext } from './context/user.context.js';
+import Button from './components/Button/Button.js';
+import Input from './components/Input/Input.js';
+import Header from './components/Layout/Header/Header.js';
+import MovieCards from './components/MovieCards/MovieCards.js';
+import Paragraph from './components/Paragraph/Paragraph.js';
+import Title from './components/Title/Title.jsx';
+import { UserContext } from './context/user.context.ts';
+import { cards } from './model/Cards.ts';
+
+interface UserModel
+{
+	userName: string;
+	isLogined: boolean;
+}
 
 function App() {
-	const inputRef = useRef(null);
-	const buttonRef = useRef(null);
+	const inputRef = useRef<HTMLInputElement>(null);
+	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const [usersState, setUsersState] = useState([]);
-	const [openState, setOpenState] = useState(false);
+	const [usersState, setUsersState] = useState<UserModel[]>([]);
+	const [openState, setOpenState] = useState<boolean>(false);
 
 	const { setUser } = useContext(UserContext);
 
 	useEffect(() => {
-		const users = JSON.parse(localStorage.getItem('users'));
+		const users: UserModel[] = JSON.parse(localStorage.getItem('users') as string);
 
 		if (users?.length)
 		{
+			const currentUser = users.find((item) => item.isLogined);
+	
+			setUser(currentUser?.userName || '');
 			setUsersState(users);
 		}
 	}, []);
@@ -35,13 +43,13 @@ function App() {
 
 	const login = () =>
 	{
-		if (!inputRef.current.value)
+		if (!inputRef.current?.value)
 		{
-			inputRef.current.focus();
+			inputRef.current?.focus();
 		}
 		else
 		{
-			const userStore = usersState.find((user) => user.userName === inputRef.current.value);
+			const userStore = usersState.find((user) => user.userName === inputRef.current?.value);
 
 			if (userStore)
 			{
@@ -94,7 +102,7 @@ function App() {
 			{
 				openState ? <>
 					<div className={ classNames(styles['app-login']) }>
-						<Title text={ 'Вход' }/>
+						<Title>Вход</Title>
 						<div className={ classNames(styles['app-login__form']) }>
 							<Input
 								placeholder={ 'Ваше имя' }
@@ -102,28 +110,27 @@ function App() {
 								isIcon={ false }
 								ref={ inputRef }
 							/>
-							<Button
-								text={ 'Войти в профиль' }
-								onClick={ login }
-							/>
+							<Button onClick={ login }>
+								Войти в профиль
+							</Button>
 						</div>
 					</div>
 				</> : <></>
 			}
 
 			<div className={ classNames(styles['app-serch']) }>
-				<Title text={ 'Поиск' }/>
-				<Paragraph text={'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'}/>
+				<Title>Поиск</Title>
+				<Paragraph>Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.</Paragraph>
 				<div className={ classNames(styles['app-serch__form']) }>
 					<Input
 						placeholder={ 'Введите название' }
 						inputType={ 'serch' }
 						isIcon={ true }
 					/>
-					<Button
-						text={ 'Искать' }
-						ref={ buttonRef }
-					/>
+					<Button ref={ buttonRef }
+					>
+						Искать
+					</Button>
 				</div>
 			</div>
 			<MovieCards cards={ cards }/>

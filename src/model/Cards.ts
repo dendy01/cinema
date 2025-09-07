@@ -1,4 +1,6 @@
-export const cards = [
+import type { MovieCardProps } from "../components/MovieCard/MovieCard.props";
+
+export const cards: MovieCardProps[] = [
 	{
 		id: crypto.randomUUID(),
 		title: 'Black Widow',

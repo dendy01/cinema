@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import Button from '../Button/Button';
+import Button from '../Button/Button.tsx';
 import styles from './MovieCard.module.css';
+import type { MovieCardProps } from './MovieCard.props.ts';
 
-function MovieCard({ title, stars, image, inFavorites }) {
+function MovieCard({ title, stars, image, inFavorites }: MovieCardProps) {
 	return (
 		<div className={ classNames(styles['movie-card']) }>
 			<p className={ classNames(styles['movie-card__stars']) }>
@@ -20,11 +21,12 @@ function MovieCard({ title, stars, image, inFavorites }) {
 			/>
 			<h2 className={ classNames(styles['movie-card__title']) }>{ title }</h2>
 			<Button
-				text={ inFavorites ? 'В избранном' : 'В избранное' }
 				icon={ inFavorites ? '/icons/bookmark-icon.svg' : '/icons/like-icon.svg' }
 				buttonClass={ 'button-favorites' }
 				buttonActive={ inFavorites ? 'button-favorites__active' : '' }
-			/>
+			>
+				{ inFavorites ? 'В избранном' : 'В избранное' }
+			</Button>
 		</div>
 	);
 }

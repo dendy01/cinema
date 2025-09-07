@@ -1,8 +1,14 @@
 import classNames from 'classnames';
-import MovieCard from '../MovieCard/MovieCard';
+import type { MovieCardProps } from '../MovieCard/MovieCard.props.ts';
+import MovieCard from '../MovieCard/MovieCard.tsx';
 import styles from './MovieCards.module.css';
 
-function MovieCards({ cards }) {
+interface MovieCards
+{
+	cards: MovieCardProps[];
+}
+
+function MovieCards({ cards }: MovieCards) {
 	return(
 		<div className={ classNames(styles['movie-cards']) }>
 			{
