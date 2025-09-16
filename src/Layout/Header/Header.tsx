@@ -1,12 +1,23 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
-import { UserContext } from '../../../context/user.context.ts';
+import { UserContext } from '../../context/user.context.ts';
 import styles from './Header.module.css';
-import type { HeaderProps } from './Header.props.ts';
+import { NavLink } from 'react-router-dom';
+import Button from '../../components/Button/Button.tsx';
 
-function Header({ logout, switchOpenLogin }: HeaderProps)
+function Header()
 {
-	const { user } = useContext(UserContext);
+	const { users, setUsers, currentUser, setCurrentUser } = useContext(UserContext);
+
+	const logout = () =>
+	{
+		const updateUsers = users.map((user) => {
+			return { ...user, isLogined: false };
+		});
+
+		setUsers([...updateUsers]);
+		setCurrentUser('');
+	};
 
 	return (
 		<header className={ classNames(styles['header']) }>
@@ -17,44 +28,39 @@ function Header({ logout, switchOpenLogin }: HeaderProps)
 			/>
 
 			<div className={ classNames(styles['links']) }>
-				<a
+				<NavLink
+					to={ '/home' }
 					className={ classNames(styles['link']) }
-					href="#"
 				>
 					Поиск фильмов
-				</a>
-				<a 
+				</NavLink>
+				<NavLink
+					to={ '/favorites' }
 					className={ classNames(styles['link']) }
-					href="#"
 				>
 					Мои фильмы
-				</a>
+				</NavLink>
 
 				{
-					user ? <>
-						<a
-							className={ classNames(styles['link']) }
-							href="#"
-						>
-							{ user }
+					currentUser ? <>
+						<Button buttonClass='button-link'>
+							{ currentUser }
 							<img
-								className={ classNames(styles['login']) }
+								className={ classNames(styles['user-icon']) }
 								src="/icons/user-icon.svg"
 								alt="user"
 							/>
-						</a>
-						<a
-							className={ classNames(styles['link']) }
-							href="#"
+						</Button>
+						<Button
+							buttonClass='button-link'
 							onClick={ logout }
 						>
 							Выйти
-						</a>
+						</Button>
 					</> : <>
-						<a
+						<NavLink
+							to={ '/login' }
 							className={ classNames(styles['link']) }
-							href="#"
-							onClick={ switchOpenLogin }
 						>
                     		Войти
 							<img
@@ -62,7 +68,7 @@ function Header({ logout, switchOpenLogin }: HeaderProps)
 								src="/icons/login-icon.svg"
 								alt="login"
 							/>
-						</a>
+						</NavLink>
 					</>
 				}
 			</div>
