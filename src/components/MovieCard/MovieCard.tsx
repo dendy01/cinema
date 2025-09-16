@@ -4,9 +4,9 @@ import styles from './MovieCard.module.css';
 import type { MovieCardProps } from './MovieCard.props.ts';
 import { Link } from 'react-router-dom';
 
-function MovieCard({ title, stars, image, inFavorites }: MovieCardProps) {
+function MovieCard({ id, title, stars, image, inFavorites }: MovieCardProps) {
 	return (
-		<Link to={ `/movie/${title}` }>
+		<Link to={ `/movie/${id}` }>
 			<div className={ classNames(styles['movie-card']) }>
 				<p className={ classNames(styles['movie-card__stars']) }>
 					<img

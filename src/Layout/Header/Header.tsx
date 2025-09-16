@@ -29,14 +29,18 @@ function Header()
 
 			<div className={ classNames(styles['links']) }>
 				<NavLink
-					to={ '/home' }
-					className={ classNames(styles['link']) }
+					to={ '/' }
+					className={ ({ isActive }) => classNames(styles['link'], {
+						[styles['active-link']]: isActive
+					}) }
 				>
 					Поиск фильмов
 				</NavLink>
 				<NavLink
 					to={ '/favorites' }
-					className={ classNames(styles['link']) }
+					className={ ({ isActive }) => classNames(styles['link'], {
+						[styles['active-link']]: isActive
+					}) }
 				>
 					Мои фильмы
 				</NavLink>
@@ -60,7 +64,9 @@ function Header()
 					</> : <>
 						<NavLink
 							to={ '/login' }
-							className={ classNames(styles['link']) }
+							className={ ({ isActive }) => classNames(styles['link'], {
+								[styles['active-link']]: isActive
+							}) }
 						>
                     		Войти
 							<img

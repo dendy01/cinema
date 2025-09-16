@@ -5,11 +5,11 @@ import classNames from "classnames";
 
 function Movie()
 {
-    const { title } = useParams();
+    const { id } = useParams();
 
     return (
         <div className={ classNames(styles['movie']) }>
-            <Title>{ title }</Title>
+            <Title>{ id }</Title>
         </div>
     );
 }

@@ -35,6 +35,10 @@
     color: #ffffff;
 }
 
+.active-link {
+    color: #ffffff;
+}
+
 .user-icon {
     width: 24px;
     height: 24px;

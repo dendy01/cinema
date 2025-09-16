@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
         element: <App />,
         children: [
             {
-                path: '/home',
+                index: true,
                 element: <Home />
             },
             {
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
                 element: <Login />
             },
             {
-                path: '/movie/:title',
+                path: '/movie/:id',
                 element: <Movie />
             }
         ]
