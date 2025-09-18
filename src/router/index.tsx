@@ -1,9 +1,14 @@
+import axios from "axios";
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
-import Home from "../pages/HomePage/Home.tsx";
+import Error from "../components/Error/Error.tsx";
+import { PREFIX } from "../helpers/API.ts";
 import Favorites from "../pages/FavoritesPage/Favorites.tsx";
 import Login from "../pages/LoginPage/Login.tsx";
-import Movie from "../pages/MoviePage/Movie.tsx";
+
+const Home = lazy(() => import("../pages/HomePage/Home.tsx"));
+const Movie = lazy(() => import("../pages/MoviePage/Movie.tsx"));
 
 export const router = createBrowserRouter([
     {
@@ -24,7 +29,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/movie/:id',
-                element: <Movie />
+                element: <Movie />,
+                errorElement: <Error />,
+                loader: async ({ params }) => {
+                    return {
+                        movie: await axios.get(`${ PREFIX }/?tt=${ params.id }`)
+                    }
+                }
             }
         ]
     }
