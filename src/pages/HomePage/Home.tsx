@@ -114,7 +114,7 @@ function Home()
             <Suspense fallback={ <Loader /> }>
                 { isLoading && <Loader />}
                 { (!isLoading && !isError) && <MovieCards cards={ cards }/> }
-                { isError && <Error /> }
+                { (!isLoading && isError) && <Error /> }
             </Suspense>
         </div>
     );

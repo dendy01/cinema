@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
 import Error from "../components/Error/Error.tsx";
 import { PREFIX } from "../helpers/API.ts";
+import RequireAuth from "../helpers/RequireAuth.tsx";
 import Favorites from "../pages/FavoritesPage/Favorites.tsx";
 import Login from "../pages/LoginPage/Login.tsx";
 
@@ -17,11 +18,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />
+                element: <RequireAuth><Home /></RequireAuth>
             },
             {
                 path: '/favorites',
-                element: <Favorites />
+                element: <RequireAuth><Favorites /></RequireAuth>
             },
             {
                 path: '/login',
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/movie/:id',
-                element: <Movie />,
+                element: <RequireAuth><Movie /></RequireAuth>,
                 errorElement: <Error />,
                 loader: async ({ params }) => {
                     return {

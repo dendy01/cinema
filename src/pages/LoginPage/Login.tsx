@@ -1,14 +1,16 @@
+import classNames from "classnames";
+import { useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Title from "../../components/Title/Title";
-import classNames from "classnames";
-import styles from './Login.module.css';
-import { useContext, useRef } from "react";
 import { UserContext } from "../../context/user.context";
+import styles from './Login.module.css';
 
 function Login()
 {
     const inputRef = useRef<HTMLInputElement>(null);
+	const navigate = useNavigate();
 
     const { users, setUsers, setCurrentUser } = useContext(UserContext);
 
@@ -44,6 +46,8 @@ function Login()
 
 			setCurrentUser(inputRef.current.value);
 			inputRef.current.value = '';
+
+			navigate('/');
 		}
 	};
 

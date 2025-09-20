@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/Button.tsx';
 import { UserContext } from '../../context/user.context.ts';
 import styles from './Header.module.css';
-import { NavLink } from 'react-router-dom';
-import Button from '../../components/Button/Button.tsx';
 
 function Header()
 {
+	const navigate = useNavigate();
 	const { users, setUsers, currentUser, setCurrentUser } = useContext(UserContext);
 
 	const logout = () =>
@@ -17,6 +18,8 @@ function Header()
 
 		setUsers([...updateUsers]);
 		setCurrentUser('');
+
+		navigate('/login');
 	};
 
 	return (
