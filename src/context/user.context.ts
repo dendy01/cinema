@@ -1,6 +1,9 @@
 import { createContext } from 'react';
+import type { UserModel } from './user.props';
 
 export const UserContext = createContext({
-	user: '',
-	setUser: (user: string) => {}
+	users: [] as UserModel[],
+	setUsers: (users: UserModel[]) => {},
+	currentUser: '',
+	setCurrentUser: (user: string) => {}
 });

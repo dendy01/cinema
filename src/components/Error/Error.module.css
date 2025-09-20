@@ -1,0 +1,10 @@
+.error {
+    text-align: center;
+}
+
+.error-text {
+    font-size: 20px;
+    font-weight: 400;
+
+    color: #767E94;
+}

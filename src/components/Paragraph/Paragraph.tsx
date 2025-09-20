@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './Paragraph.module.css';
-import type { ParagraphProps } from './Paragraph.props';
+import type { ParagraphProps } from './Paragraph.props.ts';
 
 function Paragraph({ children }: ParagraphProps) {
 	return (
