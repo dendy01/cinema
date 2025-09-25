@@ -1,14 +1,17 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button.tsx';
 import { UserContext } from '../../context/user.context.ts';
+import { type RootState } from '../../store/store.ts';
 import styles from './Header.module.css';
 
 function Header()
 {
 	const navigate = useNavigate();
 	const { users, setUsers, currentUser, setCurrentUser } = useContext(UserContext);
+	const count = useSelector((state: RootState) => state.counter.value);
 
 	const logout = () =>
 	{
@@ -45,7 +48,8 @@ function Header()
 						[styles['active-link']]: isActive
 					}) }
 				>
-					Мои фильмы
+					<span>Мои фильмы</span>
+					<span className={ classNames(styles['link-count']) }>{ count }</span>
 				</NavLink>
 
 				{
