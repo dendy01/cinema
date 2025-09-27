@@ -16,13 +16,16 @@ export const counterSlice = createSlice({
     initialState,
     reducers: {
         addMovieInFavorites: (state, action) => {
-            const { card, currentUser } = action.payload;
+            const { card, currentUser, isFavorite } = action.payload;
 
             state.value += 1;
 
             console.log(currentUser);
 
-            state.favorites = [...state.favorites, card];
+            state.favorites = [...state.favorites, {
+                ...card,
+                isFavorite
+            }];
             localStorage.setItem(`${ currentUser } favorites`, JSON.stringify(state.favorites));
         },
         removeMovieInFavorites: (state, action) => {
@@ -32,13 +35,20 @@ export const counterSlice = createSlice({
 
             state.favorites = state.favorites.filter((movie) => movie['#IMDB_ID'] !== card['#IMDB_ID']);
             localStorage.setItem(`${ currentUser } favorites`, JSON.stringify(state.favorites));
+        },
+        initializeFavorites: (state, action) => {
+            console.log(action.payload);
+
+            state.value = action.payload?.length || 0;
+            state.favorites = action.payload;
         }
     }
 });
 
 export const {
     addMovieInFavorites,
-    removeMovieInFavorites
+    removeMovieInFavorites,
+    initializeFavorites
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

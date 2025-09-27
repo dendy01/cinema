@@ -1,10 +1,11 @@
 import classNames from 'classnames';
+import { Outlet } from 'react-router-dom';
 import styles from './App.module.css';
 import { UserContextProvider } from './context/user.context.tsx';
-import { Outlet } from 'react-router-dom';
 import Header from './Layout/Header/Header.tsx';
 
-function App() {
+function App()
+{
 	return (
 		<UserContextProvider>
 			<div className={ classNames(styles['container']) }>

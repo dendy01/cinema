@@ -11,4 +11,5 @@ export interface MovieCardProps
     "#IMG_POSTER": string;
     photo_width?: number;
     photo_height?: number;
+    isFavorite? : boolean;
 }

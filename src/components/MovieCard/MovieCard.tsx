@@ -1,21 +1,26 @@
 import classNames from 'classnames';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/user.context.ts';
-import { addMovieInFavorites, removeMovieInFavorites } from '../../store/counterSlice.ts';
+import { addMovieInFavorites, removeMovieInFavorites } from '../../store/movieSlice.ts';
 import Button from '../Button/Button.tsx';
 import styles from './MovieCard.module.css';
 import { type MovieCardProps } from './MovieCard.props.ts';
 
 function MovieCard({ card }: { card: MovieCardProps })
 {
+	const movieCard = useRef(null);
+
 	const dispatch = useDispatch();
 	const [isFavorite, setIsFavorite] = useState<Boolean>(false);
 	const { currentUser } = useContext(UserContext);
 
 	return (
-		<div className={ classNames(styles['movie-card']) }>
+		<div
+			ref={ movieCard }
+			className={ classNames(styles['movie-card']) }
+		>
 			<Link to={ `/movie/${card['#IMDB_ID']}` }>
 				<p className={ classNames(styles['movie-card__stars']) }>
 					<img
@@ -33,7 +38,7 @@ function MovieCard({ card }: { card: MovieCardProps })
 				<h2 className={ classNames(styles['movie-card__title']) }>{ card['#TITLE'] }</h2>
 			</Link>
 			{
-				!isFavorite ?
+				(!isFavorite && !card.isFavorite) ?
 				<Button
 					icon={ '/icons/like-icon.svg' }
 					buttonClass={ 'button-favorites' }
@@ -42,7 +47,8 @@ function MovieCard({ card }: { card: MovieCardProps })
 						console.log(currentUser);
 						dispatch(addMovieInFavorites({
 							card,
-							currentUser
+							currentUser,
+							isFavorite: !isFavorite
 						}));
 					} }
 				>

@@ -14,12 +14,10 @@ function Favorites()
     useEffect(() => {
         const favoritesCards: MovieCardProps[] = JSON.parse(localStorage.getItem(`${currentUser} favorites`));
 
-        if (favoritesCards.length > 0)
+        if (favoritesCards?.length > 0)
         {
             setCards(favoritesCards);
         }
-
-        console.log(cards);
     }, []);
 
     return (
