@@ -34,6 +34,10 @@
     line-height: 24px;
 }
 
+.movie-card__image {
+    border-radius: 8px;
+}
+
 .movie-card__title {
     margin: 16px 0;
 
