@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type MovieCardProps } from "../components/MovieCard/MovieCard.props";
 
-export interface CounterState {
+export interface movieState {
     value: number,
     favorites: MovieCardProps[],
 }
 
-const initialState = {
+const initialState: movieState = {
     value: 0,
     favorites: []
 }
 
-export const counterSlice = createSlice({
+export const movieSlice = createSlice({
     name: 'counter',
     initialState,
     reducers: {
@@ -19,8 +19,6 @@ export const counterSlice = createSlice({
             const { card, currentUser, isFavorite } = action.payload;
 
             state.value += 1;
-
-            console.log(currentUser);
 
             state.favorites = [...state.favorites, {
                 ...card,
@@ -37,10 +35,12 @@ export const counterSlice = createSlice({
             localStorage.setItem(`${ currentUser } favorites`, JSON.stringify(state.favorites));
         },
         initializeFavorites: (state, action) => {
-            console.log(action.payload);
-
             state.value = action.payload?.length || 0;
             state.favorites = action.payload;
+        },
+        resetFavorites: (state) => {
+            state.value = 0;
+            state.favorites = []
         }
     }
 });
@@ -48,7 +48,8 @@ export const counterSlice = createSlice({
 export const {
     addMovieInFavorites,
     removeMovieInFavorites,
-    initializeFavorites
-} = counterSlice.actions;
+    initializeFavorites,
+    resetFavorites
+} = movieSlice.actions;
 
-export default counterSlice.reducer;
+export default movieSlice.reducer;

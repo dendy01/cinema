@@ -1,7 +1,7 @@
 import axios from "axios";
 import classNames from "classnames";
-import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import Error from "../../components/Error/Error";
 import Input from "../../components/Input/Input";
@@ -9,9 +9,9 @@ import Loader from "../../components/Loader/Loader";
 import { type MovieCardProps } from "../../components/MovieCard/MovieCard.props";
 import Paragraph from "../../components/Paragraph/Paragraph";
 import Title from "../../components/Title/Title";
-import { UserContext } from "../../context/user.context";
 import { PREFIX } from "../../helpers/API";
 import { initializeFavorites } from "../../store/movieSlice";
+import type { RootState } from "../../store/store";
 import styles from './Home.module.css';
 
 function Home()
@@ -22,24 +22,41 @@ function Home()
     const inputRef = useRef<HTMLInputElement>(null);
 
     const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.favorites);
+    const currentUser = useSelector((state: RootState) => state.users.currentUser);
     
     const [cards, setCards] = useState<MovieCardProps[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
-    const { currentUser } = useContext(UserContext);
 
     useEffect(() => {
         getMovie();
     }, []);
 
-	useEffect(() => {
-		const favorites = JSON.parse(localStorage.getItem(`${ currentUser } favorites`));
+    useEffect(() => {
+        if (!currentUser)
+        {
+            return;
+        }
 
-		if (currentUser && favorites?.length)
-		{
-			dispatch(initializeFavorites(favorites));
-		}
-	}, []);
+        const localFavorites = localStorage.getItem(`${currentUser} favorites`);
+        
+        if (!localFavorites)
+        {
+            if (favorites.length > 0)
+            {
+                dispatch(initializeFavorites([]));
+            }
+            return;
+        }
+
+        const parsedFavorites = JSON.parse(localFavorites);
+        
+        if (JSON.stringify(parsedFavorites) !== JSON.stringify(favorites))
+        {
+            dispatch(initializeFavorites(parsedFavorites));
+        }
+    }, [currentUser]);
 
     const getMovie = async () =>
     {

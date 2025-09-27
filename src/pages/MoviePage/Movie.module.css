@@ -1,0 +1,146 @@
+.movie-title {
+    padding: 40px;
+    border-radius: 24px;
+    margin-bottom: 80px;
+
+    background-color: #20283ECC;
+}
+
+.movie-title__paragraph {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+
+    color: #BEB7FB;
+}
+
+.movie-title__heading {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+
+    color: #EBEEF5;
+}
+
+/*///////////////////////////////////////*/
+
+.movie-card {
+    display: flex;
+    gap: 80px;
+}
+
+.image {
+    min-width: 480px;
+    min-height: 720px;
+
+    border-radius: 24px;
+}
+
+.info-description {
+    font-size: 20px;
+    font-weight: 400;
+    
+    color: #8E95A9;
+}
+
+.info-rating {
+    display: flex;
+    gap: 24px;
+}
+
+.rating {
+    padding: 4px 8px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: #FFAD49;
+    background-color: #000000A6;
+}
+
+.stars-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/*///////////////////////////////*/
+
+.movie-card {
+    margin-bottom: 35px;
+}
+
+.movie-card__info,
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.type-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: #767E94;
+}
+
+.type-title {
+    font-size: 20px;
+    font-weight: 400;
+
+    color: #C3C8D4;
+}
+
+/*////////////////////////////////*/
+
+.movie-review {
+    
+}
+
+.movie-review__subtitle {
+    margin: 0 0 8px 8px;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    color: #767E94;
+}
+
+.movie-review__description {
+    padding: 40px;
+    border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    background-color: #20283ECC;
+}
+
+.movie-review__head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-title {
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #C3C8D4;
+}
+
+.head-date {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: #767E94;
+}
+
+.movie-review__footer {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+
+    color: #8E95A9;
+}

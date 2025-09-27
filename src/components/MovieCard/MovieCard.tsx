@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { useContext, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/user.context.ts';
 import { addMovieInFavorites, removeMovieInFavorites } from '../../store/movieSlice.ts';
+import type { RootState } from '../../store/store.ts';
 import Button from '../Button/Button.tsx';
 import styles from './MovieCard.module.css';
 import { type MovieCardProps } from './MovieCard.props.ts';
@@ -14,7 +14,7 @@ function MovieCard({ card }: { card: MovieCardProps })
 
 	const dispatch = useDispatch();
 	const [isFavorite, setIsFavorite] = useState<Boolean>(false);
-	const { currentUser } = useContext(UserContext);
+	const currentUser = useSelector((state: RootState) => state.users.currentUser);
 
 	return (
 		<div
@@ -44,7 +44,6 @@ function MovieCard({ card }: { card: MovieCardProps })
 					buttonClass={ 'button-favorites' }
 					onClick={ () => {
 						setIsFavorite(true);
-						console.log(currentUser);
 						dispatch(addMovieInFavorites({
 							card,
 							currentUser,
@@ -60,7 +59,6 @@ function MovieCard({ card }: { card: MovieCardProps })
 					buttonActive={ 'button-favorites__active' }
 					onClick={ () => {
 						setIsFavorite(false);
-						console.log(currentUser);
 						dispatch(removeMovieInFavorites({
 							card,
 							currentUser

@@ -1,17 +1,20 @@
 import classNames from 'classnames';
-import { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button.tsx';
-import { UserContext } from '../../context/user.context.ts';
+import { resetFavorites } from '../../store/movieSlice.ts';
 import { type RootState } from '../../store/store.ts';
+import { setUsers } from '../../store/userSlice.ts';
 import styles from './Header.module.css';
 
 function Header()
 {
 	const navigate = useNavigate();
-	const { users, setUsers, currentUser, setCurrentUser } = useContext(UserContext);
-	const count = useSelector((state: RootState) => state.counter.value);
+	const dispatch = useDispatch();
+	const countFavorites = useSelector((state: RootState) => state.favorites.value);
+
+	const users = useSelector((state: RootState) => state.users.users);
+	const currentUser = useSelector((state: RootState) => state.users.currentUser);
 
 	const logout = () =>
 	{
@@ -19,8 +22,8 @@ function Header()
 			return { ...user, isLogined: false };
 		});
 
-		setUsers([...updateUsers]);
-		setCurrentUser('');
+		dispatch(setUsers([...updateUsers]));
+		dispatch(resetFavorites());
 
 		navigate('/login');
 	};
@@ -49,7 +52,7 @@ function Header()
 					}) }
 				>
 					<span>Мои фильмы</span>
-					<span className={ classNames(styles['link-count']) }>{ count }</span>
+					<span className={ classNames(styles['link-count']) }>{ countFavorites }</span>
 				</NavLink>
 
 				{

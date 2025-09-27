@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from './movieSlice';
+import movieReducer from './movieSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer
+        favorites: movieReducer,
+        users: userReducer
     }
 });
 
